@@ -9,7 +9,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,7 +19,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -255,13 +253,13 @@ public class CallActivity extends AppCompatActivity implements SensorEventListen
       return;
     }
 
-    int id = callInfo.getId();
-    int accId = callInfo.getAccId();
-    String callIdString = callInfo.getCallIdString();
-    String lastReason = callInfo.getLastReason();
-    String localContact = callInfo.getLocalContact();
-    String localUri = callInfo.getLocalUri();
-    String remoteContact = callInfo.getRemoteContact();
+//    int id = callInfo.getId();
+//    int accId = callInfo.getAccId();
+//    String callIdString = callInfo.getCallIdString();
+//    String lastReason = callInfo.getLastReason();
+//    String localContact = callInfo.getLocalContact();
+//    String localUri = callInfo.getLocalUri();
+//    String remoteContact = callInfo.getRemoteContact();
     String remoteUri = callInfo.getRemoteUri();
 
 //    StringBuilder sb = new StringBuilder();
@@ -410,22 +408,9 @@ public class CallActivity extends AppCompatActivity implements SensorEventListen
   private void setSpeakerphoneOn(boolean isHF)
   {
     tvHandsFree.setSelected(isHF);
-    if (!isHF)
-    {
-      mAudioManager.setSpeakerphoneOn(false);
-      if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
-        mAudioManager.setMode(AudioManager.MODE_IN_CALL);
-      else
-        mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-
-      mAudioManager.setStreamVolume(AudioManager.STREAM_VOICE_CALL, mAudioManager.getStreamMaxVolume(AudioManager.STREAM_VOICE_CALL), AudioManager.FX_KEY_CLICK);
-    } else
-    {
-      mAudioManager.setSpeakerphoneOn(true);
-      mAudioManager.setMode(AudioManager.MODE_NORMAL);
-
-      mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC), AudioManager.FX_KEY_CLICK);
-    }
+    mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+    mAudioManager.setSpeakerphoneOn(isHF);
+    setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
   }
 
   private void close(String error)
@@ -549,24 +534,24 @@ public class CallActivity extends AppCompatActivity implements SensorEventListen
   @Override
   public boolean onKeyDown(int keyCode, KeyEvent event)
   {
-    if (keyCode == KeyEvent.KEYCODE_VOLUME_UP)
-    {
-      if (FlutterPjsipPlugin.mCurrentCall != null)
-        mAudioManager.adjustStreamVolume(
-                AudioManager.STREAM_VOICE_CALL,
-                AudioManager.ADJUST_RAISE,
-                AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
-      return true;
-    } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
-    {
-      if (FlutterPjsipPlugin.mCurrentCall != null)
-        mAudioManager.adjustStreamVolume(
-                AudioManager.STREAM_VOICE_CALL,
-                AudioManager.ADJUST_LOWER,
-                AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
-      return true;
-
-    } else if (keyCode == KeyEvent.KEYCODE_BACK)
+//    if (keyCode == KeyEvent.KEYCODE_VOLUME_UP)
+//    {
+//      if (FlutterPjsipPlugin.mCurrentCall != null && mAudioManager != null)
+//        mAudioManager.adjustStreamVolume(
+//                mIsHF ? AudioManager.STREAM_MUSIC : AudioManager.STREAM_VOICE_CALL,
+//                AudioManager.ADJUST_RAISE,
+//                AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
+//      return true;
+//    } else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN)
+//    {
+//      if (FlutterPjsipPlugin.mCurrentCall != null && mAudioManager != null)
+//        mAudioManager.adjustStreamVolume(
+//                mIsHF ? AudioManager.STREAM_MUSIC : AudioManager.STREAM_VOICE_CALL,
+//                AudioManager.ADJUST_LOWER,
+//                AudioManager.FLAG_PLAY_SOUND | AudioManager.FLAG_SHOW_UI);
+//      return true;
+//    } else
+    if (keyCode == KeyEvent.KEYCODE_BACK)
       return true;
     else
       return super.onKeyDown(keyCode, event);
@@ -584,6 +569,13 @@ public class CallActivity extends AppCompatActivity implements SensorEventListen
     }
     unRegisterPhoneState();
     stopRingBackSound();
+    if (mAudioManager != null)// 还原系统音频设置
+    {
+      mAudioManager.setMicrophoneMute(false);
+      mAudioManager.setMode(AudioManager.MODE_NORMAL);
+      mAudioManager.setSpeakerphoneOn(false);
+      setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
+    }
     if (mWakeLock != null)
       mWakeLock.release();// 释放电源锁
     if (mSensorManager != null)

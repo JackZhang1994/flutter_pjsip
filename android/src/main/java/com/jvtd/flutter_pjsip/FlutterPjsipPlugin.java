@@ -51,6 +51,14 @@ public class FlutterPjsipPlugin implements MethodCallHandler
   private Result mResult;
   private String mMethod;
   private MyApp mApp;
+  private AccountConfig mAccountConfig;
+  public static MyAccount mAccount;
+  private MyBroadcastReceiver mReceiver;
+  private String mIp;// sip服务器的IP
+  private String mPort;// sip服务器的端口号
+  public static MyCall mCurrentCall;// 记录当前通话，若没有通话，为null
+  private boolean mIsLogin;
+  private boolean mIsInit;
 
   private final Handler handler = new Handler(new Handler.Callback()
   {
@@ -63,7 +71,6 @@ public class FlutterPjsipPlugin implements MethodCallHandler
         case MSG_TYPE.REG_STATE:
           boolean loginResult = (boolean) msg.obj;
           mResult.success(loginResult);
-          Log.i("日志监听", loginResult ? "登录成功" : "登录失败");
           break;
 
         case MSG_TYPE.CALL_STATE:
@@ -216,14 +223,6 @@ public class FlutterPjsipPlugin implements MethodCallHandler
       m.sendToTarget();
     }
   };
-  private AccountConfig mAccountConfig;
-  public static MyAccount mAccount;
-  private MyBroadcastReceiver mReceiver;
-  private String mIp;// sip服务器的IP
-  private String mPort;// sip服务器的端口号
-  public static MyCall mCurrentCall;// 记录当前通话，若没有通话，为null
-  private boolean mIsLogin;
-  private boolean mIsInit;
 
   private FlutterPjsipPlugin(Activity activity)
   {
@@ -250,23 +249,34 @@ public class FlutterPjsipPlugin implements MethodCallHandler
     switch (mMethod)
     {
       case METHOD_PJSIP_INIT:
-        Log.i("日志监听", "初始化");
-        pjsipInit();
-        mIsInit = true;
+        if (mIsInit)
+        {
+          mResult.success(false);
+          return;
+        } else
+        {
+          pjsipInit();
+          mIsInit = true;
+          mResult.success(true);
+        }
         break;
 
       case METHOD_PJSIP_LOGIN:
-        Log.i("日志监听", "登录");
-        if (!mIsInit) return;
-        String username = call.argument("username");
-        String password = call.argument("password");
-        mIp = call.argument("ip");
-        mPort = call.argument("port");
-        pjsipLogin(username, password, mIp, mPort);
+        if (mIsInit)
+        {
+          String username = call.argument("username");
+          String password = call.argument("password");
+          mIp = call.argument("ip");
+          mPort = call.argument("port");
+          pjsipLogin(username, password, mIp, mPort);
+        } else
+        {
+          mResult.success(false);
+          return;
+        }
         break;
 
       case METHOD_PJSIP_CALL:
-        Log.i("日志监听", "打电话");
         if (!mIsInit || !mIsLogin) return;
         String toUsername = call.argument("username");
         String toIp = call.argument("ip");
@@ -275,16 +285,21 @@ public class FlutterPjsipPlugin implements MethodCallHandler
         break;
 
       case METHOD_PJSIP_LOGOUT:
-        Log.i("日志监听", "登出");
-        if (!mIsInit) return;
-        mAccountConfig.delete();
-        mAccount.delete();
-        mIsLogin = false;
-        mResult.success(true);
+        if (mIsInit)
+        {
+          mAccountConfig.delete();
+          mAccount.delete();
+          mIsLogin = false;
+          mResult.success(true);
+        } else
+        {
+          mResult.success(false);
+          return;
+        }
+
         break;
 
       case METHOD_PJSIP_DEINIT:
-        Log.i("日志监听", "销毁");
         if (mIsInit && mApp != null)
         {
           mApp.deinit();
@@ -295,7 +310,9 @@ public class FlutterPjsipPlugin implements MethodCallHandler
           mReceiver = null;
 
           mIsInit = false;
-        }
+          mResult.success(true);
+        } else
+          mResult.success(false);
         break;
 
       default:

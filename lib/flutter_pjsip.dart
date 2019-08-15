@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 class FlutterPjsip {
   static const MethodChannel _channel = const MethodChannel('flutter_pjsip');
 
-  static Future<void> pjsipInit() async {
+  static Future<bool> pjsipInit() async {
     return await _channel.invokeMethod('method_pjsip_init');
   }
 

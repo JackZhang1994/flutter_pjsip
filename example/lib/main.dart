@@ -66,7 +66,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _sipInit() async {
-    await FlutterPjsip.pjsipInit();
+    bool initSuccess = await FlutterPjsip.pjsipInit();
+    setState(() {
+      _initSuccess = initSuccess;
+    });
   }
 
   Future<void> _sipLogin() async {
@@ -90,6 +93,12 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _sipDeinit() async {
-    await FlutterPjsip.pjsipDeinit();
+    bool initSuccess = await FlutterPjsip.pjsipDeinit();
+    setState(() {
+      if (initSuccess) {
+        _loginSuccess = false;
+        _initSuccess = false;
+      }
+    });
   }
 }
