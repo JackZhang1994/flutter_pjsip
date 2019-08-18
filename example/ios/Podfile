@@ -52,6 +52,8 @@ target 'Runner' do
   }
 
   # Plugin Pods
+  #pjsip
+#  pod 'pjsip','~> 2.8.0'
   plugin_pods = parse_KV_file('../.flutter-plugins')
   plugin_pods.map { |p|
     symlink = File.join('.symlinks', 'plugins', p[:name])

@@ -19,6 +19,26 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
+		F2BE0B7B23096D2C0012CA37 /* AVSound.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B5523096D2C0012CA37 /* AVSound.m */; };
+		F2BE0B7C23096D2C0012CA37 /* PJSIPComingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B5A23096D2C0012CA37 /* PJSIPComingViewController.m */; };
+		F2BE0B7D23096D2C0012CA37 /* PJSIPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B5B23096D2C0012CA37 /* PJSIPViewController.m */; };
+		F2BE0B7E23096D2C0012CA37 /* PJSipManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B6023096D2C0012CA37 /* PJSipManager.m */; };
+		F2BE0B7F23096D2C0012CA37 /* PJSIPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B6323096D2C0012CA37 /* PJSIPModel.m */; };
+		F2BE0B8023096D2C0012CA37 /* CustomBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B6623096D2C0012CA37 /* CustomBtn.m */; };
+		F2BE0B8123096D2C0012CA37 /* UIView+Shadow.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B6823096D2C0012CA37 /* UIView+Shadow.m */; };
+		F2BE0B8223096D2C0012CA37 /* FBShimmeringLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B6D23096D2C0012CA37 /* FBShimmeringLayer.m */; };
+		F2BE0B8323096D2C0012CA37 /* FBShimmeringView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B6E23096D2C0012CA37 /* FBShimmeringView.m */; };
+		F2BE0B8423096D2C0012CA37 /* CRMCallCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B7023096D2C0012CA37 /* CRMCallCenterView.m */; };
+		F2BE0B8523096D2C0012CA37 /* CustomLab.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B7123096D2C0012CA37 /* CustomLab.m */; };
+		F2BE0B8623096D2C0012CA37 /* ring_back.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2BE0B7423096D2C0012CA37 /* ring_back.wav */; };
+		F2BE0B8723096D2C0012CA37 /* incoming_ring.wav in Resources */ = {isa = PBXBuildFile; fileRef = F2BE0B7523096D2C0012CA37 /* incoming_ring.wav */; };
+		F2BE0B8823096D2C0012CA37 /* callcenter_makeCall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BE0B7623096D2C0012CA37 /* callcenter_makeCall@2x.png */; };
+		F2BE0B8923096D2C0012CA37 /* callcenter_makeCall@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BE0B7723096D2C0012CA37 /* callcenter_makeCall@3x.png */; };
+		F2BE0B8A23096D2C0012CA37 /* FlutterAppDelegate+Pjsip.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BE0B7A23096D2C0012CA37 /* FlutterAppDelegate+Pjsip.m */; };
+		F2C15380230973A600944026 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C1537F230973A500944026 /* AVFoundation.framework */; };
+		F2C15382230973B400944026 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F2C15381230973B400944026 /* CoreTelephony.framework */; };
+		F2F7D89023051E59007A1798 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2F7D88F23051E59007A1798 /* MainViewController.m */; };
+		F7E5CDF764551DEE053D66E5 /* libPods-Runner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 072DB98B35675C79A87F19A9 /* libPods-Runner.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,13 +57,17 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		072DB98B35675C79A87F19A9 /* libPods-Runner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Runner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
+		2DF7D6E93F8F9584B156C066 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		3B80C3931E831B6300D905FE /* App.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = App.framework; path = Flutter/App.framework; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
 		7AFFD8ED1D35381100E5BB4D /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		7C8D01BB7BAABF84B443CBFE /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
+		89D780F88DC8255A849D91E3 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
 		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
 		9740EEBA1CF902C7004384FC /* Flutter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Flutter.framework; path = Flutter/Flutter.framework; sourceTree = "<group>"; };
@@ -53,6 +77,39 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2BE0B5523096D2C0012CA37 /* AVSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVSound.m; sourceTree = "<group>"; };
+		F2BE0B5623096D2C0012CA37 /* AVSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVSound.h; sourceTree = "<group>"; };
+		F2BE0B5A23096D2C0012CA37 /* PJSIPComingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJSIPComingViewController.m; sourceTree = "<group>"; };
+		F2BE0B5B23096D2C0012CA37 /* PJSIPViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJSIPViewController.m; sourceTree = "<group>"; };
+		F2BE0B5C23096D2C0012CA37 /* PJSIPComingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJSIPComingViewController.h; sourceTree = "<group>"; };
+		F2BE0B5D23096D2C0012CA37 /* PJSIPViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJSIPViewController.h; sourceTree = "<group>"; };
+		F2BE0B5F23096D2C0012CA37 /* PJSipManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJSipManager.h; sourceTree = "<group>"; };
+		F2BE0B6023096D2C0012CA37 /* PJSipManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJSipManager.m; sourceTree = "<group>"; };
+		F2BE0B6223096D2C0012CA37 /* PJSIPModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PJSIPModel.h; sourceTree = "<group>"; };
+		F2BE0B6323096D2C0012CA37 /* PJSIPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PJSIPModel.m; sourceTree = "<group>"; };
+		F2BE0B6523096D2C0012CA37 /* CRMCallCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CRMCallCenterView.h; sourceTree = "<group>"; };
+		F2BE0B6623096D2C0012CA37 /* CustomBtn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBtn.m; sourceTree = "<group>"; };
+		F2BE0B6723096D2C0012CA37 /* CustomLab.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLab.h; sourceTree = "<group>"; };
+		F2BE0B6823096D2C0012CA37 /* UIView+Shadow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shadow.m"; sourceTree = "<group>"; };
+		F2BE0B6A23096D2C0012CA37 /* FBShimmering.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmering.h; sourceTree = "<group>"; };
+		F2BE0B6B23096D2C0012CA37 /* FBShimmeringLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringLayer.h; sourceTree = "<group>"; };
+		F2BE0B6C23096D2C0012CA37 /* FBShimmeringView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBShimmeringView.h; sourceTree = "<group>"; };
+		F2BE0B6D23096D2C0012CA37 /* FBShimmeringLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringLayer.m; sourceTree = "<group>"; };
+		F2BE0B6E23096D2C0012CA37 /* FBShimmeringView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBShimmeringView.m; sourceTree = "<group>"; };
+		F2BE0B6F23096D2C0012CA37 /* CustomBtn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBtn.h; sourceTree = "<group>"; };
+		F2BE0B7023096D2C0012CA37 /* CRMCallCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CRMCallCenterView.m; sourceTree = "<group>"; };
+		F2BE0B7123096D2C0012CA37 /* CustomLab.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLab.m; sourceTree = "<group>"; };
+		F2BE0B7223096D2C0012CA37 /* UIView+Shadow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shadow.h"; sourceTree = "<group>"; };
+		F2BE0B7423096D2C0012CA37 /* ring_back.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = ring_back.wav; sourceTree = "<group>"; };
+		F2BE0B7523096D2C0012CA37 /* incoming_ring.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = incoming_ring.wav; sourceTree = "<group>"; };
+		F2BE0B7623096D2C0012CA37 /* callcenter_makeCall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callcenter_makeCall@2x.png"; sourceTree = "<group>"; };
+		F2BE0B7723096D2C0012CA37 /* callcenter_makeCall@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "callcenter_makeCall@3x.png"; sourceTree = "<group>"; };
+		F2BE0B7923096D2C0012CA37 /* FlutterAppDelegate+Pjsip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlutterAppDelegate+Pjsip.h"; sourceTree = "<group>"; };
+		F2BE0B7A23096D2C0012CA37 /* FlutterAppDelegate+Pjsip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FlutterAppDelegate+Pjsip.m"; sourceTree = "<group>"; };
+		F2C1537F230973A500944026 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		F2C15381230973B400944026 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		F2F7D88E23051E59007A1798 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		F2F7D88F23051E59007A1798 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,14 +117,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2C15382230973B400944026 /* CoreTelephony.framework in Frameworks */,
+				F2C15380230973A600944026 /* AVFoundation.framework in Frameworks */,
 				9705A1C61CF904A100538489 /* Flutter.framework in Frameworks */,
 				3B80C3941E831B6300D905FE /* App.framework in Frameworks */,
+				F7E5CDF764551DEE053D66E5 /* libPods-Runner.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86ED7701D8FB1D38681A6B1E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7C8D01BB7BAABF84B443CBFE /* Pods-Runner.debug.xcconfig */,
+				2DF7D6E93F8F9584B156C066 /* Pods-Runner.release.xcconfig */,
+				89D780F88DC8255A849D91E3 /* Pods-Runner.profile.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,7 +157,8 @@
 				9740EEB11CF90186004384FC /* Flutter */,
 				97C146F01CF9000F007C117D /* Runner */,
 				97C146EF1CF9000F007C117D /* Products */,
-				CF3B75C9A7D2FA2A4C99F110 /* Frameworks */,
+				86ED7701D8FB1D38681A6B1E /* Pods */,
+				E445B84605125B8C589D50AF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +173,7 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				F2BE0B5323096D2C0012CA37 /* PJSIPClass */,
 				7AFFD8ED1D35381100E5BB4D /* AppDelegate.h */,
 				7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
@@ -111,6 +183,8 @@
 				97C146F11CF9000F007C117D /* Supporting Files */,
 				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
+				F2F7D88E23051E59007A1798 /* MainViewController.h */,
+				F2F7D88F23051E59007A1798 /* MainViewController.m */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -123,6 +197,132 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E445B84605125B8C589D50AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F2C15381230973B400944026 /* CoreTelephony.framework */,
+				F2C1537F230973A500944026 /* AVFoundation.framework */,
+				072DB98B35675C79A87F19A9 /* libPods-Runner.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F2BE0B5323096D2C0012CA37 /* PJSIPClass */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B5423096D2C0012CA37 /* Tools */,
+				F2BE0B5723096D2C0012CA37 /* HHAVPlayerLoader */,
+				F2BE0B5923096D2C0012CA37 /* Controller */,
+				F2BE0B5E23096D2C0012CA37 /* Manager */,
+				F2BE0B6123096D2C0012CA37 /* Model */,
+				F2BE0B6423096D2C0012CA37 /* View */,
+				F2BE0B7323096D2C0012CA37 /* Assets */,
+				F2BE0B7823096D2C0012CA37 /* PjsipDelegate */,
+			);
+			path = PJSIPClass;
+			sourceTree = "<group>";
+		};
+		F2BE0B5423096D2C0012CA37 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B5523096D2C0012CA37 /* AVSound.m */,
+				F2BE0B5623096D2C0012CA37 /* AVSound.h */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		F2BE0B5723096D2C0012CA37 /* HHAVPlayerLoader */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B5823096D2C0012CA37 /* Category */,
+			);
+			path = HHAVPlayerLoader;
+			sourceTree = "<group>";
+		};
+		F2BE0B5823096D2C0012CA37 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		F2BE0B5923096D2C0012CA37 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B5A23096D2C0012CA37 /* PJSIPComingViewController.m */,
+				F2BE0B5B23096D2C0012CA37 /* PJSIPViewController.m */,
+				F2BE0B5C23096D2C0012CA37 /* PJSIPComingViewController.h */,
+				F2BE0B5D23096D2C0012CA37 /* PJSIPViewController.h */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F2BE0B5E23096D2C0012CA37 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B5F23096D2C0012CA37 /* PJSipManager.h */,
+				F2BE0B6023096D2C0012CA37 /* PJSipManager.m */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		F2BE0B6123096D2C0012CA37 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B6223096D2C0012CA37 /* PJSIPModel.h */,
+				F2BE0B6323096D2C0012CA37 /* PJSIPModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2BE0B6423096D2C0012CA37 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B6523096D2C0012CA37 /* CRMCallCenterView.h */,
+				F2BE0B6623096D2C0012CA37 /* CustomBtn.m */,
+				F2BE0B6723096D2C0012CA37 /* CustomLab.h */,
+				F2BE0B6823096D2C0012CA37 /* UIView+Shadow.m */,
+				F2BE0B6923096D2C0012CA37 /* FBShimmering */,
+				F2BE0B6F23096D2C0012CA37 /* CustomBtn.h */,
+				F2BE0B7023096D2C0012CA37 /* CRMCallCenterView.m */,
+				F2BE0B7123096D2C0012CA37 /* CustomLab.m */,
+				F2BE0B7223096D2C0012CA37 /* UIView+Shadow.h */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F2BE0B6923096D2C0012CA37 /* FBShimmering */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B6A23096D2C0012CA37 /* FBShimmering.h */,
+				F2BE0B6B23096D2C0012CA37 /* FBShimmeringLayer.h */,
+				F2BE0B6C23096D2C0012CA37 /* FBShimmeringView.h */,
+				F2BE0B6D23096D2C0012CA37 /* FBShimmeringLayer.m */,
+				F2BE0B6E23096D2C0012CA37 /* FBShimmeringView.m */,
+			);
+			path = FBShimmering;
+			sourceTree = "<group>";
+		};
+		F2BE0B7323096D2C0012CA37 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B7423096D2C0012CA37 /* ring_back.wav */,
+				F2BE0B7523096D2C0012CA37 /* incoming_ring.wav */,
+				F2BE0B7623096D2C0012CA37 /* callcenter_makeCall@2x.png */,
+				F2BE0B7723096D2C0012CA37 /* callcenter_makeCall@3x.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		F2BE0B7823096D2C0012CA37 /* PjsipDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				F2BE0B7923096D2C0012CA37 /* FlutterAppDelegate+Pjsip.h */,
+				F2BE0B7A23096D2C0012CA37 /* FlutterAppDelegate+Pjsip.m */,
+			);
+			path = PjsipDelegate;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -130,12 +330,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
 			buildPhases = (
+				A3F5A02B4710028ADFC25439 /* [CP] Check Pods Manifest.lock */,
 				9740EEB61CF901F6004384FC /* Run Script */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
+				3AFEC6457B325AF4FD39F628 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -157,6 +359,7 @@
 				TargetAttributes = {
 					97C146ED1CF9000F007C117D = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = Q523R4V974;
 					};
 				};
 			};
@@ -184,16 +387,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				F2BE0B8623096D2C0012CA37 /* ring_back.wav in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				9740EEB41CF90195004384FC /* Debug.xcconfig in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
+				F2BE0B8823096D2C0012CA37 /* callcenter_makeCall@2x.png in Resources */,
+				F2BE0B8723096D2C0012CA37 /* incoming_ring.wav in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
+				F2BE0B8923096D2C0012CA37 /* callcenter_makeCall@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3AFEC6457B325AF4FD39F628 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -220,7 +442,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
+		};
+		A3F5A02B4710028ADFC25439 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Runner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -230,8 +474,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */,
+				F2BE0B7B23096D2C0012CA37 /* AVSound.m in Sources */,
+				F2BE0B7E23096D2C0012CA37 /* PJSipManager.m in Sources */,
+				F2BE0B8023096D2C0012CA37 /* CustomBtn.m in Sources */,
+				F2BE0B7C23096D2C0012CA37 /* PJSIPComingViewController.m in Sources */,
+				F2BE0B7D23096D2C0012CA37 /* PJSIPViewController.m in Sources */,
+				F2BE0B8223096D2C0012CA37 /* FBShimmeringLayer.m in Sources */,
+				F2BE0B8323096D2C0012CA37 /* FBShimmeringView.m in Sources */,
+				F2BE0B8A23096D2C0012CA37 /* FlutterAppDelegate+Pjsip.m in Sources */,
+				F2BE0B8123096D2C0012CA37 /* UIView+Shadow.m in Sources */,
+				F2F7D89023051E59007A1798 /* MainViewController.m in Sources */,
 				97C146F31CF9000F007C117D /* main.m in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
+				F2BE0B8423096D2C0012CA37 /* CRMCallCenterView.m in Sources */,
+				F2BE0B8523096D2C0012CA37 /* CustomLab.m in Sources */,
+				F2BE0B7F23096D2C0012CA37 /* PJSIPModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,11 +570,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = S8QB4VV633;
+				DEVELOPMENT_TEAM = Q523R4V974;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/OpenSSL-Universal\"",
+					"\"${PODS_ROOT}/Headers/Public/flutter_pjsip\"",
+					"$(PODS_ROOT)/**",
 				);
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -325,8 +589,58 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"crypto\"",
+					"-l\"flutter_pjsip\"",
+					"-l\"g7221codec-apple-darwin_ios\"",
+					"-l\"gsmcodec-apple-darwin_ios\"",
+					"-l\"ilbccodec-apple-darwin_ios\"",
+					"-l\"openh264\"",
+					"-l\"opus\"",
+					"-l\"pj-apple-darwin_ios\"",
+					"-l\"pjlib-util-apple-darwin_ios\"",
+					"-l\"pjmedia-apple-darwin_ios\"",
+					"-l\"pjmedia-audiodev-apple-darwin_ios\"",
+					"-l\"pjmedia-codec-apple-darwin_ios\"",
+					"-l\"pjmedia-videodev-apple-darwin_ios\"",
+					"-l\"pjnath-apple-darwin_ios\"",
+					"-l\"pjsdp-apple-darwin_ios\"",
+					"-l\"pjsip-apple-darwin_ios\"",
+					"-l\"pjsip-simple-apple-darwin_ios\"",
+					"-l\"pjsip-ua-apple-darwin_ios\"",
+					"-l\"pjsua-apple-darwin_ios\"",
+					"-l\"pjsua2-apple-darwin_ios\"",
+					"-l\"resample-apple-darwin_ios\"",
+					"-l\"speex-apple-darwin_ios\"",
+					"-l\"srtp-apple-darwin_ios\"",
+					"-l\"ssl\"",
+					"-l\"stdc++\"",
+					"-l\"webrtc-apple-darwin_ios\"",
+					"-l\"yuv-apple-darwin_ios\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Flutter\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jvtd.flutterPjsipExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Profile;
@@ -443,10 +757,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = Q523R4V974;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/OpenSSL-Universal\"",
+					"\"${PODS_ROOT}/Headers/Public/flutter_pjsip\"",
+					"$(PODS_ROOT)/**",
 				);
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -454,8 +776,58 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"crypto\"",
+					"-l\"flutter_pjsip\"",
+					"-l\"g7221codec-apple-darwin_ios\"",
+					"-l\"gsmcodec-apple-darwin_ios\"",
+					"-l\"ilbccodec-apple-darwin_ios\"",
+					"-l\"openh264\"",
+					"-l\"opus\"",
+					"-l\"pj-apple-darwin_ios\"",
+					"-l\"pjlib-util-apple-darwin_ios\"",
+					"-l\"pjmedia-apple-darwin_ios\"",
+					"-l\"pjmedia-audiodev-apple-darwin_ios\"",
+					"-l\"pjmedia-codec-apple-darwin_ios\"",
+					"-l\"pjmedia-videodev-apple-darwin_ios\"",
+					"-l\"pjnath-apple-darwin_ios\"",
+					"-l\"pjsdp-apple-darwin_ios\"",
+					"-l\"pjsip-apple-darwin_ios\"",
+					"-l\"pjsip-simple-apple-darwin_ios\"",
+					"-l\"pjsip-ua-apple-darwin_ios\"",
+					"-l\"pjsua-apple-darwin_ios\"",
+					"-l\"pjsua2-apple-darwin_ios\"",
+					"-l\"resample-apple-darwin_ios\"",
+					"-l\"speex-apple-darwin_ios\"",
+					"-l\"srtp-apple-darwin_ios\"",
+					"-l\"ssl\"",
+					"-l\"stdc++\"",
+					"-l\"webrtc-apple-darwin_ios\"",
+					"-l\"yuv-apple-darwin_ios\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Flutter\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jvtd.flutterPjsipExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -466,10 +838,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
+				DEVELOPMENT_TEAM = Q523R4V974;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/OpenSSL-Universal\"",
+					"\"${PODS_ROOT}/Headers/Public/flutter_pjsip\"",
+					"$(PODS_ROOT)/**",
 				);
 				INFOPLIST_FILE = Runner/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -477,8 +857,58 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Flutter",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"crypto\"",
+					"-l\"flutter_pjsip\"",
+					"-l\"g7221codec-apple-darwin_ios\"",
+					"-l\"gsmcodec-apple-darwin_ios\"",
+					"-l\"ilbccodec-apple-darwin_ios\"",
+					"-l\"openh264\"",
+					"-l\"opus\"",
+					"-l\"pj-apple-darwin_ios\"",
+					"-l\"pjlib-util-apple-darwin_ios\"",
+					"-l\"pjmedia-apple-darwin_ios\"",
+					"-l\"pjmedia-audiodev-apple-darwin_ios\"",
+					"-l\"pjmedia-codec-apple-darwin_ios\"",
+					"-l\"pjmedia-videodev-apple-darwin_ios\"",
+					"-l\"pjnath-apple-darwin_ios\"",
+					"-l\"pjsdp-apple-darwin_ios\"",
+					"-l\"pjsip-apple-darwin_ios\"",
+					"-l\"pjsip-simple-apple-darwin_ios\"",
+					"-l\"pjsip-ua-apple-darwin_ios\"",
+					"-l\"pjsua-apple-darwin_ios\"",
+					"-l\"pjsua2-apple-darwin_ios\"",
+					"-l\"resample-apple-darwin_ios\"",
+					"-l\"speex-apple-darwin_ios\"",
+					"-l\"srtp-apple-darwin_ios\"",
+					"-l\"ssl\"",
+					"-l\"stdc++\"",
+					"-l\"webrtc-apple-darwin_ios\"",
+					"-l\"yuv-apple-darwin_ios\"",
+					"-framework",
+					"\"AVFoundation\"",
+					"-framework",
+					"\"AudioToolbox\"",
+					"-framework",
+					"\"CFNetwork\"",
+					"-framework",
+					"\"CoreMedia\"",
+					"-framework",
+					"\"CoreVideo\"",
+					"-framework",
+					"\"Flutter\"",
+					"-framework",
+					"\"OpenGLES\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.jvtd.flutterPjsipExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
