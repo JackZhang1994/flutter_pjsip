@@ -3,12 +3,15 @@
 
 ## 0.0.2
 PjSip Flutter版插件，实现了语音通话功能，使用PjSip为2.9版本。
+
 改动：插件只提供账号及电话状态的传递，通话页需自行在Flutter端实现。
 
 #### 插件使用介绍：
 1. 通道名称（MethodChannel name） **flutter_pjsip**
 2. 初始化FlutterPjsip对象方式：
+
 1）FlutterPjsip pjsip = FlutterPjsip.instance;
+
 2）FlutterPjsip pjsip = FlutterPjsip();
 3. Flutter端 -> Platform端
 
@@ -29,6 +32,7 @@ PjSip Flutter版插件，实现了语音通话功能，使用PjSip为2.9版本�
 4. Platform端 -> Flutter端
 
 **方法名称**：method_call_status_changed
+
 **传递数据类型**：Map<dynamic, dynamic>
 
 Map类型介绍：
