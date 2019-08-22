@@ -1,6 +1,6 @@
 package com.jvtd.flutter_pjsip.entity;
 
-import com.jvtd.flutter_pjsip.app.MyApp;
+import com.jvtd.flutter_pjsip.PjSipManager;
 
 import org.pjsip.pjsua2.Account;
 import org.pjsip.pjsua2.AccountConfig;
@@ -76,7 +76,7 @@ public class MyAccount extends Account
   @Override
   public void onRegState(OnRegStateParam prm)
   {
-    MyApp.observer.notifyRegState(prm.getCode(), prm.getReason(), prm.getExpiration());
+    PjSipManager.observer.notifyRegState(prm.getCode(), prm.getReason(), prm.getExpiration());
   }
 
   /**
@@ -87,7 +87,7 @@ public class MyAccount extends Account
   {
     System.out.println("======== Incoming call ======== ");
     MyCall call = new MyCall(this, prm.getCallId());
-    MyApp.observer.notifyIncomingCall(call);
+    PjSipManager.observer.notifyIncomingCall(call);
   }
 
   @Override

@@ -21,10 +21,6 @@
         android:required="false" />
 
     <application>
-        <activity android:name=".ui.CallActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout"
-            android:screenOrientation="portrait"
-            android:theme="@style/CallPhoneTheme"/>
     </application>
 
 </manifest>

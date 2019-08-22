@@ -1,24 +1,31 @@
-package com.jvtd.flutter_pjsip.app;
+package com.jvtd.flutter_pjsip;
 
+import com.jvtd.flutter_pjsip.entity.MyAccount;
+import com.jvtd.flutter_pjsip.entity.MyCall;
 import com.jvtd.flutter_pjsip.interfaces.MyAppObserver;
-import com.jvtd.flutter_pjsip.utils.MyLogWriter;
 
+import org.pjsip.pjsua2.AccountConfig;
+import org.pjsip.pjsua2.AuthCredInfo;
+import org.pjsip.pjsua2.AuthCredInfoVector;
+import org.pjsip.pjsua2.CallOpParam;
 import org.pjsip.pjsua2.Endpoint;
 import org.pjsip.pjsua2.EpConfig;
 import org.pjsip.pjsua2.IpChangeParam;
-import org.pjsip.pjsua2.LogConfig;
 import org.pjsip.pjsua2.TransportConfig;
 import org.pjsip.pjsua2.UaConfig;
-import org.pjsip.pjsua2.pj_log_decoration;
 import org.pjsip.pjsua2.pjsip_transport_type_e;
 
 /**
- * Description:
+ * Description: PjSip管理类
  * Author: Jack Zhang
- * create on: 2019-08-12 14:25
+ * create on: 2019-08-21 23:19
  */
-public class MyApp
+public class PjSipManager
 {
+  private static volatile PjSipManager mInstance;
+  private AccountConfig mAccountConfig;
+  private MyAccount mAccount;
+
   static
   {
     try
@@ -31,17 +38,33 @@ public class MyApp
       System.out.println("UnsatisfiedLinkError: " + e.getMessage());
       System.out.println("This could be safely ignored if you don't need video.");
     }
-//    try
-//    {
+    try
+    {
       System.loadLibrary("pjsua2");
       System.out.println("Library loaded");
-//    } catch (Exception e)
-//    {
-//      e.printStackTrace();
-//    } catch (Error error)
-//    {
-//      error.printStackTrace();
-//    }
+    } catch (Exception e)
+    {
+      e.printStackTrace();
+    } catch (Error error)
+    {
+      error.printStackTrace();
+    }
+  }
+
+  public static PjSipManager getInstance()
+  {
+    if (mInstance == null)
+      synchronized (PjSipManager.class)
+      {
+        if (mInstance == null)
+          mInstance = new PjSipManager();
+      }
+    return mInstance;
+  }
+
+  private PjSipManager()
+  {
+
   }
 
   public static Endpoint mEndPoint;
@@ -81,24 +104,6 @@ public class MyApp
 
     EpConfig epConfig = new EpConfig();
 
-    // TODO: 2019-08-14 注销掉日志部分
-//    // LogConfig来自定义日志设置
-//    LogConfig log_cfg = epConfig.getLogConfig();
-//    /* Override log level setting */
-//    int LOG_LEVEL = 4;
-//    log_cfg.setLevel(LOG_LEVEL);
-//    log_cfg.setConsoleLevel(LOG_LEVEL);
-//    /* Maintain reference to log writer to avoid premature cleanup by GC */
-//    MyLogWriter logWriter = new MyLogWriter();
-//    log_cfg.setWriter(logWriter);
-//    log_cfg.setDecor(log_cfg.getDecor() &
-//            ~(pj_log_decoration.PJ_LOG_HAS_CR.swigValue() |
-//                    pj_log_decoration.PJ_LOG_HAS_NEWLINE.swigValue()));
-
-    /* Write log to file (just uncomment whenever needed) */
-    //String log_path = android.os.Environment.getExternalStorageDirectory().toString();
-    //log_cfg.setFilename(log_path + "/pjsip.log");
-
     // UAConfig，指定核心SIP用户代理设置
     UaConfig ua_cfg = epConfig.getUaConfig();
     ua_cfg.setUserAgent("Pjsua2 Android " + mEndPoint.libVersion().getFull());
@@ -121,6 +126,7 @@ public class MyApp
       mEndPoint.libInit(epConfig);
     } catch (Exception e)
     {
+      e.printStackTrace();
       return;
     }
 
@@ -137,8 +143,8 @@ public class MyApp
     } catch (Exception e)
     {
       e.printStackTrace();
+      return;
     }
-
 //    try
 //    {
 //      mEndPoint.transportCreate(pjsip_transport_type_e.PJSIP_TRANSPORT_TCP, sipTpConfig);
@@ -202,5 +208,57 @@ public class MyApp
      */
     mEndPoint.delete();
     mEndPoint = null;
+  }
+
+  public void login(String username, String password, String ip, String port)
+  {
+    mAccountConfig = new AccountConfig();
+    mAccountConfig.getNatConfig().setIceEnabled(true);
+    // 未实现视频功能，先置位false
+    mAccountConfig.getVideoConfig().setAutoTransmitOutgoing(false);// 自动向外传输视频流
+    mAccountConfig.getVideoConfig().setAutoShowIncoming(false);// 自动接收并显示来的视频流
+    mAccountConfig.setIdUri("sip:" + username + "@" + ip + ":" + port);
+    mAccountConfig.getRegConfig().setRegistrarUri("sip:" + ip + ":" + port);
+    AuthCredInfoVector creds = mAccountConfig.getSipConfig().getAuthCreds();
+    if (creds != null)
+    {
+      creds.clear();
+      if (username != null && username.length() != 0)
+        creds.add(new AuthCredInfo("Digest", "*", username, 0, password));
+    }
+
+    mAccount = new MyAccount(mAccountConfig);
+    try
+    {
+      mAccount.create(mAccountConfig);
+    } catch (Exception e)
+    {
+      e.printStackTrace();
+      mAccount = null;
+    }
+  }
+
+  public MyCall call(String username, String ip, String port)
+  {
+    MyCall call = new MyCall(mAccount, -1);
+    CallOpParam prm = new CallOpParam(true);
+//    prm.getOpt().setAudioCount(1);
+//    prm.getOpt().setVideoCount(1);
+    String uri = "sip:" + username + "@" + ip + ":" + port;
+    try
+    {
+      call.makeCall(uri, prm);
+    } catch (Exception e)
+    {
+      call.delete();
+      return null;
+    }
+    return call;
+  }
+
+  public void logout()
+  {
+    mAccountConfig.delete();
+    mAccount.delete();
   }
 }

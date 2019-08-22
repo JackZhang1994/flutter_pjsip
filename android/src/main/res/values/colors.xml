@@ -4,7 +4,4 @@
     <color name="primary_color">#43495C</color>
     <color name="primary_color_dark">#3f4454</color>
     <color name="primary_color_accent">#373b46</color>
-    <!--空白页面默认背景颜色-->
-    <color name="background_default_color">#f9f9f9</color>
-    <color name="white">#ffffff</color>
 </resources>

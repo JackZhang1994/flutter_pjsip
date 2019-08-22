@@ -1,6 +1,6 @@
 package com.jvtd.flutter_pjsip.entity;
 
-import com.jvtd.flutter_pjsip.app.MyApp;
+import com.jvtd.flutter_pjsip.PjSipManager;
 
 import org.pjsip.pjsua2.Buddy;
 import org.pjsip.pjsua2.BuddyConfig;
@@ -61,6 +61,6 @@ public class MyBuddy extends Buddy
   @Override
   public void onBuddyState()
   {
-    MyApp.observer.notifyBuddyState(this);
+    PjSipManager.observer.notifyBuddyState(this);
   }
 }

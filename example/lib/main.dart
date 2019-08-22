@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_pjsip/flutter_pjsip.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,21 +12,56 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool _initSuccess = false;
-  bool _loginSuccess = false;
+  SipCallState _calltate = SipCallState.PJSIP_INV_STATE_NULL;
+  String _calltateText = '';
+  FlutterPjsip _pjsip;
 
   @override
   void initState() {
     super.initState();
-    initPlatformState();
+    initSipPlugin();
   }
 
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initPlatformState() async {
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
+  void initSipPlugin() {
+    _pjsip = new FlutterPjsip();
+    _pjsip.onSipStateChanged.listen((state) {
+      print('收到状态: $state');
+      SipCallState callState;
+      switch (state) {
+        case "CALLING":
+          callState = SipCallState.PJSIP_INV_STATE_CALLING;
+          break;
+
+        case "INCOMING":
+          callState = SipCallState.PJSIP_INV_STATE_INCOMING;
+          break;
+
+        case "EARLY":
+          callState = SipCallState.PJSIP_INV_STATE_EARLY;
+          break;
+
+        case "CONNECTING":
+          callState = SipCallState.PJSIP_INV_STATE_CONNECTING;
+          break;
+
+        case "CONFIRMED":
+          callState = SipCallState.PJSIP_INV_STATE_CONFIRMED;
+          break;
+
+        case "DISCONNECTED":
+          callState = SipCallState.PJSIP_INV_STATE_DISCONNECTED;
+          break;
+
+        default:
+          callState = SipCallState.PJSIP_INV_STATE_NULL;
+          break;
+      }
+
+      setState(() {
+        this._calltate = callState;
+        this._calltateText = state;
+      });
+    });
   }
 
   @override
@@ -41,12 +77,10 @@ class _MyAppState extends State<MyApp> {
               child: Text('Sip初始化'),
               onPressed: () => {_sipInit()},
             ),
-            Text('PjSip Init : $_initSuccess\n'),
             RaisedButton(
               child: Text('Sip登录'),
               onPressed: () => {_sipLogin()},
             ),
-            Text('PjSip Login : $_loginSuccess\n'),
             RaisedButton(
               child: Text('Sip打电话'),
               onPressed: () => {_sipCall()},
@@ -59,6 +93,27 @@ class _MyAppState extends State<MyApp> {
               child: Text('Sip销毁'),
               onPressed: () => {_sipDeinit()},
             ),
+            RaisedButton(
+              child: Text('Sip接听'),
+              onPressed: () => {_sipReceive()},
+            ),
+            RaisedButton(
+              child: Text('Sip拒接/挂断'),
+              onPressed: () => {_sipRefuse()},
+            ),
+            RaisedButton(
+              child: Text('Sip免提'),
+              onPressed: () => {_sipHandsFree()},
+            ),
+            RaisedButton(
+              child: Text('Sip静音'),
+              onPressed: () => {_sipMute()},
+            ),
+            RaisedButton(
+              child: Text('Sip通道销毁'),
+              onPressed: () => {_sipDispose()},
+            ),
+            Text('电话状态监听：$_calltateText'),
           ],
         ),
       ),
@@ -66,39 +121,58 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _sipInit() async {
-    bool initSuccess = await FlutterPjsip.pjsipInit();
-    setState(() {
-      _initSuccess = initSuccess;
-    });
+    bool initSuccess = await _pjsip.pjsipInit();
+    showToast('初始化', initSuccess);
   }
 
   Future<void> _sipLogin() async {
     bool loginSuccess =
-        await FlutterPjsip.pjsipLogin(username: '1012', password: '123@jvtd', ip: '117.78.34.48', port: '6050');
-
-    setState(() {
-      _loginSuccess = loginSuccess;
-    });
+        await _pjsip.pjsipLogin(username: '1012', password: '123@jvtd', ip: '117.78.34.48', port: '6050');
+    showToast('登录', loginSuccess);
   }
 
   Future<void> _sipCall() async {
-    await FlutterPjsip.pjsipCall(username: '1010', ip: '117.78.34.48', port: '6050');
+    bool callSuccess = await _pjsip.pjsipCall(username: '1010', ip: '117.78.34.48', port: '6050');
+    showToast('打电话', callSuccess);
   }
 
   Future<void> _sipLogout() async {
-    bool logoutSuccess = await FlutterPjsip.pjsipLogout();
-    setState(() {
-      _loginSuccess = !logoutSuccess;
-    });
+    bool logoutSuccess = await _pjsip.pjsipLogout();
+    showToast('登出', logoutSuccess);
   }
 
   Future<void> _sipDeinit() async {
-    bool initSuccess = await FlutterPjsip.pjsipDeinit();
-    setState(() {
-      if (initSuccess) {
-        _loginSuccess = false;
-        _initSuccess = false;
-      }
-    });
+    bool initSuccess = await _pjsip.pjsipDeinit();
+    showToast('销毁', initSuccess);
+  }
+
+  Future<void> _sipReceive() async {
+    bool receiveSuccess = await _pjsip.pjsipReceive();
+    showToast('接听', receiveSuccess);
+  }
+
+  Future<void> _sipRefuse() async {
+    bool refuseSuccess = await _pjsip.pjsipRefuse();
+    showToast('拒接/挂断', refuseSuccess);
+  }
+
+  Future<void> _sipHandsFree() async {
+    bool handsFreeSuccess = await _pjsip.pjsipHandsFree();
+    showToast('免提状态更改', handsFreeSuccess);
+  }
+
+  Future<void> _sipMute() async {
+    bool muteSuccess = await _pjsip.pjsipMute();
+    showToast('静音状态更改', muteSuccess);
+  }
+
+  Future<void> _sipDispose() async {
+    await _pjsip.dispose();
+    showToast('通道销毁', true);
+  }
+
+  void showToast(String method, bool success) {
+    String successText = success ? '成功' : '失败';
+    Fluttertoast.showToast(msg: '$method $successText');
   }
 }
