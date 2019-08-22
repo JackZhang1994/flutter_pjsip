@@ -58,10 +58,10 @@ public class FlutterPjsipPlugin implements MethodCallHandler
   private static final String METHOD_PJSIP_DEINIT = "method_pjsip_deinit";
   private static final String METHOD_PJSIP_RECEIVE = "method_pjsip_receive";
   private static final String METHOD_PJSIP_REFUSE = "method_pjsip_refuse";
-  private static final String METHOD_PJSIP_AUDIO_SESSION = "method_pjsip_audio_session";
-  private static final String METHOD_PJSIP_MUTE_MICROPHONE = "method_pjsip_mute_microphone";
+  private static final String METHOD_PJSIP_HANDS_FREE = "method_pjsip_hands_free";
+  private static final String METHOD_PJSIP_MUTE = "method_pjsip_mute";
 
-  private static final String METHOD_CALL_STATUS_CHANGED = "method_call_status_changed";
+  private static final String METHOD_CALL_STATUS_CHANGED = "method_call_state_changed";
 
 
   private MethodChannel mChannel;
@@ -359,11 +359,11 @@ public class FlutterPjsipPlugin implements MethodCallHandler
         unRegisterPhoneState();
         break;
 
-      case METHOD_PJSIP_AUDIO_SESSION:
+      case METHOD_PJSIP_HANDS_FREE:
         pjsipHandsFree();
         break;
 
-      case METHOD_PJSIP_MUTE_MICROPHONE:
+      case METHOD_PJSIP_MUTE:
         pjsipMute();
         break;
 
@@ -618,9 +618,8 @@ public class FlutterPjsipPlugin implements MethodCallHandler
   private Map<String, Object> buildArguments(String status, Object remoteUri)
   {
     Map<String, Object> result = new HashMap<>();
-    result.put("status", status);
-    if (remoteUri != null)
-      result.put("value", remoteUri);
+    result.put("call_state", status);
+    result.put("remote_uri", remoteUri != null ? remoteUri : "");
     return result;
   }
 
