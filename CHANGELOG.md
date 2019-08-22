@@ -9,10 +9,8 @@ PjSip Flutter版插件，实现了语音通话功能，使用PjSip为2.9版本�
 #### 插件使用介绍：
 1. 通道名称（MethodChannel name） **flutter_pjsip**
 2. 初始化FlutterPjsip对象方式：
-
-1）FlutterPjsip pjsip = FlutterPjsip.instance;
-
-2）FlutterPjsip pjsip = FlutterPjsip();
+    1）FlutterPjsip pjsip = FlutterPjsip.instance;
+    2）FlutterPjsip pjsip = FlutterPjsip();
 3. Flutter端 -> Platform端
 
 **功能** | **方法** | **方法名称**
