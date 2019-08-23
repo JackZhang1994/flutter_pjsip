@@ -21,7 +21,6 @@ import android.support.annotation.NonNull;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.jvtd.flutter_pjsip.entity.MSG_TYPE;
 import com.jvtd.flutter_pjsip.entity.MyBuddy;
@@ -201,6 +200,11 @@ public class FlutterPjsipPlugin implements MethodCallHandler
             // 通话状态被确认，震动500ms
             if (mVibrator != null)
               mVibrator.vibrate(500);
+            if (mActivity != null)
+              mActivity.setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
+            mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+            mAudioManager.setSpeakerphoneOn(false);
+            mAudioManager.setMicrophoneMute(false);
           } else if (state == pjsip_inv_state.PJSIP_INV_STATE_DISCONNECTED)
           {
             mPjSipManagerState = PjSipManagerState.STATE_DISCONNECTED;
