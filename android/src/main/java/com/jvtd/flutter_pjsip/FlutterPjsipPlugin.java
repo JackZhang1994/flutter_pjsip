@@ -202,9 +202,15 @@ public class FlutterPjsipPlugin implements MethodCallHandler
               mVibrator.vibrate(500);
             if (mActivity != null)
               mActivity.setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
-            mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-            mAudioManager.setSpeakerphoneOn(false);
-            mAudioManager.setMicrophoneMute(false);
+            if (mAudioManager != null)
+            {
+              if (mAudioManager.getMode() != AudioManager.MODE_IN_COMMUNICATION)
+                mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+              if (mAudioManager.isMicrophoneMute())
+                mAudioManager.setMicrophoneMute(false);
+              if (mAudioManager.isSpeakerphoneOn())
+                mAudioManager.setSpeakerphoneOn(false);
+            }
           } else if (state == pjsip_inv_state.PJSIP_INV_STATE_DISCONNECTED)
           {
             mPjSipManagerState = PjSipManagerState.STATE_DISCONNECTED;
