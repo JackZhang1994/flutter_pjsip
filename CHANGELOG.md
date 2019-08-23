@@ -1,8 +1,9 @@
-## 0.0.1
-带页面的PjSip，页面为platform实现
+## 0.0.2+1
+修改插件库支持Android最低版本为16
 
 ## 0.0.2
 PjSip Flutter版插件，实现了语音通话功能，使用PjSip为2.9版本。
+
 
 改动：插件只提供账号及电话状态的传递，通话页需自行在Flutter端实现。
 
@@ -41,3 +42,7 @@ call_state | 通话状态 | CALLING、INCOMING、EARLY、CONNECTING、CONFIRMED�
 remote_uri | 对方Uri |
 
 5. 确保不用插件后，需调用 [FlutterPjsip#dispose()] 方法，关闭全部StreamController
+
+
+## 0.0.1
+带页面的PjSip，页面为platform实现
