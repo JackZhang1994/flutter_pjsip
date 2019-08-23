@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.jvtd.flutter_pjsip.entity.MSG_TYPE;
 import com.jvtd.flutter_pjsip.entity.MyBuddy;
@@ -36,7 +37,6 @@ import org.pjsip.pjsua2.pjsip_status_code;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.flutter.Log;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -212,7 +212,9 @@ public class FlutterPjsipPlugin implements MethodCallHandler
           }
 
           if (mChannel != null)
+          {
             mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments(callInfo.getStateText(), callInfo.getRemoteUri()));
+          }
           break;
 
         case MSG_TYPE.CALL_MEDIA_STATE:
@@ -261,7 +263,9 @@ public class FlutterPjsipPlugin implements MethodCallHandler
               mPjSipManagerState = PjSipManagerState.STATE_INCOMING;
 
               if (mChannel != null)
-                mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments("PJSIP_INV_STATE_INCOMING", mCurrentCall.getInfo().getRemoteUri()));
+              {
+                mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments("INCOMING", mCurrentCall.getInfo().getRemoteUri()));
+              }
             } catch (Exception e)
             {
               e.printStackTrace();
@@ -306,7 +310,6 @@ public class FlutterPjsipPlugin implements MethodCallHandler
       handleMethodCall(call, result);
     } catch (Exception e)
     {
-      Log.e(TAG, "Unexpected error!", e);
       result.error("Unexpected error!", e.getMessage(), e);
     }
   }
@@ -534,7 +537,9 @@ public class FlutterPjsipPlugin implements MethodCallHandler
         mCurrentCall = null;
         stopRingBackSound();
         if (mChannel != null)
-          mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments("PJSIP_INV_STATE_DISCONNECTED", null));
+        {
+          mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments("DISCONNCTD", null));
+        }
         mPjSipManagerState = PjSipManagerState.STATE_DISCONNECTED;
       }
     }

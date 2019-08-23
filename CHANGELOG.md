@@ -38,7 +38,7 @@ Map类型介绍：
 
 **key** | **字段含义** | **包含类型**
 -|-|-
-call_state | 通话状态 | CALLING、INCOMING、EARLY、CONNECTING、CONFIRMED、DISCONNECTED|
+call_state | 通话状态 | CALLING、INCOMING、EARLY、CONNECTING、CONFIRMED、DISCONNCTD|
 remote_uri | 对方Uri |
 
 5. 确保不用插件后，需调用 [FlutterPjsip#dispose()] 方法，关闭全部StreamController
