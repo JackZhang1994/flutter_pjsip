@@ -601,7 +601,7 @@ public class FlutterPjsipPlugin implements MethodCallHandler
       if (connectivity_mgr != null)
       {
         NetworkInfo net_info = connectivity_mgr.getActiveNetworkInfo();
-        if (net_info != null)
+        if (net_info != null && conn_name != null)
         {
           if (net_info.isConnectedOrConnecting() && !conn_name.equalsIgnoreCase(""))
           {
