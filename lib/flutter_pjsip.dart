@@ -2,22 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 
-enum SipCallState {
-  PJSIP_INV_STATE_NULL,
-  PJSIP_INV_STATE_CALLING,
-  PJSIP_INV_STATE_INCOMING,
-  PJSIP_INV_STATE_EARLY,
-  PJSIP_INV_STATE_CONNECTING,
-  PJSIP_INV_STATE_CONFIRMED,
-  PJSIP_INV_STATE_DISCONNECTED,
-}
-
 class FlutterPjsip {
   static const MethodChannel _channel = const MethodChannel('flutter_pjsip');
 
-  final StreamController<String> _sipStatusController = StreamController<String>.broadcast();
+  final StreamController<Map<dynamic, dynamic>> _sipStateController =
+      StreamController<Map<dynamic, dynamic>>.broadcast();
 
-  Stream<String> get onSipStateChanged => _sipStatusController.stream;
+  Stream<Map<dynamic, dynamic>> get onSipStateChanged => _sipStateController.stream;
 
   static final pjsip = FlutterPjsip();
 
@@ -47,12 +38,10 @@ class FlutterPjsip {
 
   static Future<void> _doHandlePlatformCall(MethodCall call) async {
     final Map<dynamic, dynamic> callArgs = call.arguments as Map;
-
-    final value = callArgs['status'];
-
+//    final remoteUri = callArgs['remote_uri'];
     switch (call.method) {
-      case 'method_call_status_changed':
-        pjsip._sipStatusController.add(value);
+      case 'method_call_state_changed':
+        pjsip._sipStateController.add(callArgs);
         break;
 
       default:
@@ -87,7 +76,7 @@ class FlutterPjsip {
     return await _channel.invokeMethod('method_pjsip_deinit');
   }
 
-  ///pjsip接收电话
+  ///pjsip接听
   Future<bool> pjsipReceive() async {
     return await _channel.invokeMethod('method_pjsip_receive');
   }
@@ -99,18 +88,18 @@ class FlutterPjsip {
 
   ///pjsip免提
   Future<bool> pjsipHandsFree() async {
-    return await _channel.invokeMethod('method_pjsip_audio_session');
+    return await _channel.invokeMethod('method_pjsip_hands_free');
   }
 
   ///pjsip静音
   Future<bool> pjsipMute() async {
-    return await _channel.invokeMethod('method_pjsip_mute_microphone');
+    return await _channel.invokeMethod('method_pjsip_mute');
   }
 
   ///关闭全部StreamController
   Future<void> dispose() async {
     List<Future> futures = [];
-    if (!_sipStatusController.isClosed) futures.add(_sipStatusController.close());
+    if (!_sipStateController.isClosed) futures.add(_sipStateController.close());
     await Future.wait(futures);
   }
 }

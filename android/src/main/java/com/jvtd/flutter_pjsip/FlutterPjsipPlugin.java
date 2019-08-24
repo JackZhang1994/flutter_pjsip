@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.jvtd.flutter_pjsip.entity.MSG_TYPE;
 import com.jvtd.flutter_pjsip.entity.MyBuddy;
@@ -36,7 +37,6 @@ import org.pjsip.pjsua2.pjsip_status_code;
 import java.util.HashMap;
 import java.util.Map;
 
-import io.flutter.Log;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
@@ -58,10 +58,10 @@ public class FlutterPjsipPlugin implements MethodCallHandler
   private static final String METHOD_PJSIP_DEINIT = "method_pjsip_deinit";
   private static final String METHOD_PJSIP_RECEIVE = "method_pjsip_receive";
   private static final String METHOD_PJSIP_REFUSE = "method_pjsip_refuse";
-  private static final String METHOD_PJSIP_AUDIO_SESSION = "method_pjsip_audio_session";
-  private static final String METHOD_PJSIP_MUTE_MICROPHONE = "method_pjsip_mute_microphone";
+  private static final String METHOD_PJSIP_HANDS_FREE = "method_pjsip_hands_free";
+  private static final String METHOD_PJSIP_MUTE = "method_pjsip_mute";
 
-  private static final String METHOD_CALL_STATUS_CHANGED = "method_call_status_changed";
+  private static final String METHOD_CALL_STATUS_CHANGED = "method_call_state_changed";
 
 
   private MethodChannel mChannel;
@@ -201,6 +201,17 @@ public class FlutterPjsipPlugin implements MethodCallHandler
             // 通话状态被确认，震动500ms
             if (mVibrator != null)
               mVibrator.vibrate(500);
+            if (mActivity != null)
+              mActivity.setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
+            if (mAudioManager != null)
+            {
+              if (mAudioManager.getMode() != AudioManager.MODE_IN_COMMUNICATION)
+                mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
+              if (mAudioManager.isMicrophoneMute())
+                mAudioManager.setMicrophoneMute(false);
+              if (mAudioManager.isSpeakerphoneOn())
+                mAudioManager.setSpeakerphoneOn(false);
+            }
           } else if (state == pjsip_inv_state.PJSIP_INV_STATE_DISCONNECTED)
           {
             mPjSipManagerState = PjSipManagerState.STATE_DISCONNECTED;
@@ -212,7 +223,10 @@ public class FlutterPjsipPlugin implements MethodCallHandler
           }
 
           if (mChannel != null)
+          {
+            Log.i(TAG, "FlutterPjsipPlugin接收到状态" + callInfo.getStateText());
             mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments(callInfo.getStateText(), callInfo.getRemoteUri()));
+          }
           break;
 
         case MSG_TYPE.CALL_MEDIA_STATE:
@@ -261,7 +275,9 @@ public class FlutterPjsipPlugin implements MethodCallHandler
               mPjSipManagerState = PjSipManagerState.STATE_INCOMING;
 
               if (mChannel != null)
-                mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments("PJSIP_INV_STATE_INCOMING", mCurrentCall.getInfo().getRemoteUri()));
+              {
+                mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments("INCOMING", mCurrentCall.getInfo().getRemoteUri()));
+              }
             } catch (Exception e)
             {
               e.printStackTrace();
@@ -306,7 +322,6 @@ public class FlutterPjsipPlugin implements MethodCallHandler
       handleMethodCall(call, result);
     } catch (Exception e)
     {
-      Log.e(TAG, "Unexpected error!", e);
       result.error("Unexpected error!", e.getMessage(), e);
     }
   }
@@ -359,11 +374,11 @@ public class FlutterPjsipPlugin implements MethodCallHandler
         unRegisterPhoneState();
         break;
 
-      case METHOD_PJSIP_AUDIO_SESSION:
+      case METHOD_PJSIP_HANDS_FREE:
         pjsipHandsFree();
         break;
 
-      case METHOD_PJSIP_MUTE_MICROPHONE:
+      case METHOD_PJSIP_MUTE:
         pjsipMute();
         break;
 
@@ -534,7 +549,9 @@ public class FlutterPjsipPlugin implements MethodCallHandler
         mCurrentCall = null;
         stopRingBackSound();
         if (mChannel != null)
-          mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments("PJSIP_INV_STATE_DISCONNECTED", null));
+        {
+          mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments("DISCONNCTD", null));
+        }
         mPjSipManagerState = PjSipManagerState.STATE_DISCONNECTED;
       }
     }
@@ -596,7 +613,7 @@ public class FlutterPjsipPlugin implements MethodCallHandler
       if (connectivity_mgr != null)
       {
         NetworkInfo net_info = connectivity_mgr.getActiveNetworkInfo();
-        if (net_info != null)
+        if (net_info != null && conn_name != null)
         {
           if (net_info.isConnectedOrConnecting() && !conn_name.equalsIgnoreCase(""))
           {
@@ -618,9 +635,8 @@ public class FlutterPjsipPlugin implements MethodCallHandler
   private Map<String, Object> buildArguments(String status, Object remoteUri)
   {
     Map<String, Object> result = new HashMap<>();
-    result.put("status", status);
-    if (remoteUri != null)
-      result.put("value", remoteUri);
+    result.put("call_state", status);
+    result.put("remote_uri", remoteUri != null ? remoteUri : "");
     return result;
   }
 
@@ -693,14 +709,14 @@ public class FlutterPjsipPlugin implements MethodCallHandler
     {
       try
       {
+        if (mActivity != null)
+          mActivity.setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
         if (mAudioManager.getMode() != AudioManager.MODE_NORMAL)
           mAudioManager.setMode(AudioManager.MODE_NORMAL);
         if (mAudioManager.isMicrophoneMute())
           mAudioManager.setMicrophoneMute(false);
         if (mAudioManager.isSpeakerphoneOn())
           mAudioManager.setSpeakerphoneOn(false);
-        if (mActivity != null)
-          mActivity.setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
       } catch (Exception e)
       {
         e.printStackTrace();

@@ -12,7 +12,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  SipCallState _calltate = SipCallState.PJSIP_INV_STATE_NULL;
   String _calltateText = '';
   FlutterPjsip _pjsip;
 
@@ -23,42 +22,35 @@ class _MyAppState extends State<MyApp> {
   }
 
   void initSipPlugin() {
-    _pjsip = new FlutterPjsip();
-    _pjsip.onSipStateChanged.listen((state) {
+    _pjsip = FlutterPjsip.instance;
+    _pjsip.onSipStateChanged.listen((map) {
+      final state = map['call_state'];
+      final remoteUri = map['remote_uri'];
       print('收到状态: $state');
-      SipCallState callState;
       switch (state) {
         case "CALLING":
-          callState = SipCallState.PJSIP_INV_STATE_CALLING;
           break;
 
         case "INCOMING":
-          callState = SipCallState.PJSIP_INV_STATE_INCOMING;
           break;
 
         case "EARLY":
-          callState = SipCallState.PJSIP_INV_STATE_EARLY;
           break;
 
         case "CONNECTING":
-          callState = SipCallState.PJSIP_INV_STATE_CONNECTING;
           break;
 
         case "CONFIRMED":
-          callState = SipCallState.PJSIP_INV_STATE_CONFIRMED;
           break;
 
         case "DISCONNECTED":
-          callState = SipCallState.PJSIP_INV_STATE_DISCONNECTED;
           break;
 
         default:
-          callState = SipCallState.PJSIP_INV_STATE_NULL;
           break;
       }
 
       setState(() {
-        this._calltate = callState;
         this._calltateText = state;
       });
     });
