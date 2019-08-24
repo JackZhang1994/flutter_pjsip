@@ -65,23 +65,29 @@
             }else{
                 NSLog(@"登陆失败");
             }
-//             [[PJSipManager manager] dailWithDelegate:self phonenumber:@"" Name:[dict objectForKey:@"username"] password:[dict objectForKey:@"password"] IPAddress:[NSString stringWithFormat:@"%@:%@",[dict objectForKey:@"ip"],[dict objectForKey:@"port"]]];
-            
         }else if ([method isEqualToString:method_pjsip_call]) {/** 拨打电话*/
-            PJSIPViewController *vc = [[PJSIPViewController alloc] init];
-            PJSIPModel * model = [[PJSIPModel alloc]init];
-            NSDictionary * dict = (NSDictionary *)call.arguments;
-            model.sipIp = [dict objectForKey:@"ip"];
-            model.sip_port = [dict objectForKey:@"port"];
-            model.nickName = [dict objectForKey:@"username"];
-            model.password = [dict objectForKey:@"password"];
-            model.phone = [dict objectForKey:@"username"];
-            vc.model = model;
-            //vc.dict = call.arguments;
-            [rootController presentViewController:vc animated:NO completion:nil];
+//            PJSIPViewController *vc = [[PJSIPViewController alloc] init];
+//            PJSIPModel * model = [[PJSIPModel alloc]init];
+//            NSDictionary * dict = (NSDictionary *)call.arguments;
+//            model.sipIp = [dict objectForKey:@"ip"];
+//            model.sip_port = [dict objectForKey:@"port"];
+//            model.nickName = [dict objectForKey:@"username"];
+//            model.password = [dict objectForKey:@"password"];
+//            model.phone = [dict objectForKey:@"username"];
+//            vc.model = model;
+//            //vc.dict = call.arguments;
+//            [rootController presentViewController:vc animated:NO completion:nil];
+            [[PJSipManager manager] dailWithPhonenumber:[dict objectForKey:@"username"]];
+            
             result(@"present返回到flutter");
         }else if ([method isEqualToString:method_pjsip_logout]) {/** 登出*/
-            [PJSipManager attempDealloc];//暂时用销毁
+            if ([[PJSipManager manager]logOut]) {
+                result(@(YES));
+            }else{
+                result(@(NO));
+
+            }
+//            [[PJSipManager manager]logOut];//暂时用销毁
 
             result(@"present返回到flutter");
         }else if ([method isEqualToString:method_pjsip_deinit]) {/** 销毁*/
