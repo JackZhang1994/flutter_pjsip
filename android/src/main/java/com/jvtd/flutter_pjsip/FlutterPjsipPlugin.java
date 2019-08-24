@@ -21,6 +21,7 @@ import android.support.annotation.NonNull;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.jvtd.flutter_pjsip.entity.MSG_TYPE;
 import com.jvtd.flutter_pjsip.entity.MyBuddy;
@@ -223,6 +224,7 @@ public class FlutterPjsipPlugin implements MethodCallHandler
 
           if (mChannel != null)
           {
+            Log.i(TAG, "FlutterPjsipPlugin接收到状态" + callInfo.getStateText());
             mChannel.invokeMethod(METHOD_CALL_STATUS_CHANGED, buildArguments(callInfo.getStateText(), callInfo.getRemoteUri()));
           }
           break;
@@ -707,14 +709,14 @@ public class FlutterPjsipPlugin implements MethodCallHandler
     {
       try
       {
+        if (mActivity != null)
+          mActivity.setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
         if (mAudioManager.getMode() != AudioManager.MODE_NORMAL)
           mAudioManager.setMode(AudioManager.MODE_NORMAL);
         if (mAudioManager.isMicrophoneMute())
           mAudioManager.setMicrophoneMute(false);
         if (mAudioManager.isSpeakerphoneOn())
           mAudioManager.setSpeakerphoneOn(false);
-        if (mActivity != null)
-          mActivity.setVolumeControlStream(AudioManager.USE_DEFAULT_STREAM_TYPE);
       } catch (Exception e)
       {
         e.printStackTrace();

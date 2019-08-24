@@ -5,7 +5,8 @@ import 'package:flutter/services.dart';
 class FlutterPjsip {
   static const MethodChannel _channel = const MethodChannel('flutter_pjsip');
 
-  final StreamController<Map<dynamic, dynamic>> _sipStateController = StreamController<Map<dynamic, dynamic>>.broadcast();
+  final StreamController<Map<dynamic, dynamic>> _sipStateController =
+      StreamController<Map<dynamic, dynamic>>.broadcast();
 
   Stream<Map<dynamic, dynamic>> get onSipStateChanged => _sipStateController.stream;
 
@@ -37,7 +38,6 @@ class FlutterPjsip {
 
   static Future<void> _doHandlePlatformCall(MethodCall call) async {
     final Map<dynamic, dynamic> callArgs = call.arguments as Map;
-//    final status = callArgs['call_state'];
 //    final remoteUri = callArgs['remote_uri'];
     switch (call.method) {
       case 'method_call_state_changed':
