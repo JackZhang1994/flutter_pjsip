@@ -11,6 +11,7 @@
     MainViewController * VC = [[MainViewController alloc]init];
     UINavigationController * NVC = [[UINavigationController alloc]initWithRootViewController:VC];
     [self.window setRootViewController:NVC];
+//    FlutterViewController * VC = [[FlutterViewController alloc]init];
     [self setupPjsip:application rootController:VC];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

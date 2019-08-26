@@ -9,6 +9,7 @@
 #import "FlutterAppDelegate+Pjsip.h"
 #import "PJSIPViewController.h"
 #import "PJSIPModel.h"
+
 /** 信号通道*/
 #define flutterMethodChannel  @"flutter_pjsip"
 /** pjsip初始化*/
@@ -17,11 +18,18 @@
 #define method_pjsip_login  @"method_pjsip_login"
 /** pjsip拨打电话*/
 #define method_pjsip_call  @"method_pjsip_call"
+/** 接收电话*/
+#define method_pjsip_receive  @"method_pjsip_receive"
+/** 挂断&&拒接*/
+#define method_pjsip_refuse  @"method_pjsip_refuse"
+/** 免提*/
+#define method_pjsip_hands_free  @"method_pjsip_hands_free"
+/** 静音*/
+#define method_pjsip_mute  @"method_pjsip_mute"
 /** pjsip登出*/
 #define method_pjsip_logout  @"method_pjsip_logout"
 /** pjsip销毁*/
 #define method_pjsip_deinit  @"method_pjsip_deinit"
-
 
 @implementation FlutterAppDelegate (Pjsip)
 
@@ -31,68 +39,49 @@
     
 }
 - (void)methodChannelFunctionWithRootController:(UIViewController *)rootController{
-    //创建 FlutterMethodChannel
     
     FlutterMethodChannel* methodChannel = [FlutterMethodChannel
                                            methodChannelWithName:flutterMethodChannel binaryMessenger:(FlutterViewController *)rootController];
+    [PJSipManager manager].methodChannel = methodChannel;
     //设置监听
     [methodChannel setMethodCallHandler:^(FlutterMethodCall* call, FlutterResult result) {
-        // TODO
         NSString *method=call.method;
-        /*
-         ip = "117.78.34.48";
-         password = "123@jvtd";
-         port = 6050;
-         username = 1012;
-         */
-        PJSIPModel * model = [[PJSIPModel alloc]init];
         NSDictionary * dict = (NSDictionary *)call.arguments;
-        model.phone = [dict objectForKey:@"ip"];
         if ([method isEqualToString:method_pjsip_init]) {/** 初始化*/
             [PJSipManager manager];
-            result(@"初始化成功");
+            result(@(YES));
         }else if ([method isEqualToString:method_pjsip_login]) {/** 登录*/
-            result(@"present返回到flutter");
-            PJSIPModel * model = [[PJSIPModel alloc]init];
-            NSDictionary * dict = (NSDictionary *)call.arguments;
-            model.sipIp = [dict objectForKey:@"ip"];
-            model.sip_port = [dict objectForKey:@"port"];
-            model.nickName = [dict objectForKey:@"username"];
-            model.password = [dict objectForKey:@"password"];
-            NSLog(@"返回值%@",call.arguments);//[dict objectForKey:@"username"
-            if ([[PJSipManager manager] registerAccountWithName:@"1010" password:[dict objectForKey:@"password"] IPAddress:[NSString stringWithFormat:@"%@:%@",[dict objectForKey:@"ip"],[dict objectForKey:@"port"]]]) {
-                NSLog(@"登陆成功");
+            NSLog(@"登录名称：%@",[dict objectForKey:@"username"]);
+            if ([[PJSipManager manager] registerAccountWithName:[dict objectForKey:@"username"] password:[dict objectForKey:@"password"] IPAddress:[NSString stringWithFormat:@"%@:%@",[dict objectForKey:@"ip"],[dict objectForKey:@"port"]]]) {
+                result(@(YES));
             }else{
-                NSLog(@"登陆失败");
+                 result(@(NO));
             }
         }else if ([method isEqualToString:method_pjsip_call]) {/** 拨打电话*/
-//            PJSIPViewController *vc = [[PJSIPViewController alloc] init];
-//            PJSIPModel * model = [[PJSIPModel alloc]init];
-//            NSDictionary * dict = (NSDictionary *)call.arguments;
-//            model.sipIp = [dict objectForKey:@"ip"];
-//            model.sip_port = [dict objectForKey:@"port"];
-//            model.nickName = [dict objectForKey:@"username"];
-//            model.password = [dict objectForKey:@"password"];
-//            model.phone = [dict objectForKey:@"username"];
-//            vc.model = model;
-//            //vc.dict = call.arguments;
-//            [rootController presentViewController:vc animated:NO completion:nil];
+            NSLog(@"拨打的电话号码：%@",[dict objectForKey:@"username"]);
             [[PJSipManager manager] dailWithPhonenumber:[dict objectForKey:@"username"]];
-            
-            result(@"present返回到flutter");
+            result(@(YES));
+        }else if ([method isEqualToString:method_pjsip_receive]) {/** 接收电话*/
+            [[PJSipManager manager] incommingCallReceive];
+            result(@(YES));
+        }else if ([method isEqualToString:method_pjsip_hands_free]) {/** 免提*/
+            [[PJSipManager manager]setAudioSession];
+            result(@(YES));
+        }else if ([method isEqualToString:method_pjsip_mute]) {/** 静音*/
+            [[PJSipManager manager] muteMicrophone];
+            result(@(YES));
+        }else if ([method isEqualToString:method_pjsip_refuse]) {/** 挂断&&拒接*/
+            [[PJSipManager manager]hangup];
+            result(@(YES));
         }else if ([method isEqualToString:method_pjsip_logout]) {/** 登出*/
             if ([[PJSipManager manager]logOut]) {
                 result(@(YES));
             }else{
                 result(@(NO));
-
             }
-//            [[PJSipManager manager]logOut];//暂时用销毁
-
-            result(@"present返回到flutter");
         }else if ([method isEqualToString:method_pjsip_deinit]) {/** 销毁*/
             [PJSipManager attempDealloc];
-            result(@"present返回到flutter");
+            result(@(YES));
         }
     }];
 }

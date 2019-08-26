@@ -65,7 +65,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCallStatusChanged:) name:@"SIPCallStatusChangedNotification" object:nil];
     self.callCenterPhoneStype = IncomingPhoneStype;
     [self initUI];
-    pjsua_call_answer((pjsua_call_id)_callId, 180, NULL, NULL);
+//    pjsua_call_answer((pjsua_call_id)_callId, 180, NULL, NULL);
     [self.callCenterView.makeCall_btn setHidden:YES];
     [self.callCenterView.phone_image setHidden:YES];
     [self.callCenterView.time_lbl setText:@"请接收"];

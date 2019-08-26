@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <Flutter/Flutter.h>
 
 
 //PJSIP_INV_STATE_NULL,        /**< Before INVITE is sent or received  */0
@@ -47,6 +47,9 @@ typedef NS_ENUM(NSUInteger, CallStatusType) {
 - (BOOL)create;
 //拨号
 - (void)dailWithPhonenumber:(NSString *)phonenumber;
+
+@property(nonatomic,strong) FlutterMethodChannel* methodChannel;
+
 /**
  拨打电话
 
@@ -75,5 +78,7 @@ typedef NS_ENUM(NSUInteger, CallStatusType) {
 - (void)unmuteMicrophone;
 //退出登录
 -(BOOL)logOut;
+//免提
+-(void)setAudioSession;
 
 @end
