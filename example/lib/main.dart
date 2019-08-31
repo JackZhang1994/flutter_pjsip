@@ -67,43 +67,43 @@ class _MyAppState extends State<MyApp> {
           children: <Widget>[
             RaisedButton(
               child: Text('Sip初始化'),
-              onPressed: () => {_sipInit()},
+              onPressed: () => _sipInit(),
             ),
             RaisedButton(
               child: Text('Sip登录'),
-              onPressed: () => {_sipLogin()},
+              onPressed: () => _sipLogin(),
             ),
             RaisedButton(
               child: Text('Sip打电话'),
-              onPressed: () => {_sipCall()},
+              onPressed: () => _sipCall(),
             ),
             RaisedButton(
               child: Text('Sip登出'),
-              onPressed: () => {_sipLogout()},
+              onPressed: () => _sipLogout(),
             ),
             RaisedButton(
               child: Text('Sip销毁'),
-              onPressed: () => {_sipDeinit()},
+              onPressed: () => _sipDeinit(),
             ),
             RaisedButton(
               child: Text('Sip接听'),
-              onPressed: () => {_sipReceive()},
+              onPressed: () => _sipReceive(),
             ),
             RaisedButton(
               child: Text('Sip拒接/挂断'),
-              onPressed: () => {_sipRefuse()},
+              onPressed: () => _sipRefuse(),
             ),
             RaisedButton(
               child: Text('Sip免提'),
-              onPressed: () => {_sipHandsFree()},
+              onPressed: () => _sipHandsFree(),
             ),
             RaisedButton(
               child: Text('Sip静音'),
-              onPressed: () => {_sipMute()},
+              onPressed: () => _sipMute(),
             ),
             RaisedButton(
               child: Text('Sip通道销毁'),
-              onPressed: () => {_sipDispose()},
+              onPressed: () => _sipDispose(),
             ),
             Text('电话状态监听：$_calltateText'),
           ],
